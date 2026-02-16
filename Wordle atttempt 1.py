@@ -8,6 +8,7 @@ import os
 COLOR_GREEN = "\033[32m"
 COLOR_YELLOW = "\033[33m"
 RESET = "\033[0m"
+collapse = 0
 
 while True:
     # clears the terminal, to be made optional
@@ -18,19 +19,17 @@ while True:
         pass
 
     # Name of the game, uppercase
-    print("WORDLE")
+    print("WORDLE Knockoff! (play the real thing!)")
     # Rules of wordle
-    print("You get several guesses (currently 6) to guess a word of 5 letters.\n- If you get a letter correct in the right position, it becomes green!\n- If you get a letter correct in the wrong position, it becomes yellow.\n- If you get the letter wrong, it doesn't change colors.")
+    print(f"You get several guesses (currently 6) to guess a word of 5 letters.\n- If you get a letter correct in the right position, it becomes {COLOR_GREEN}green{RESET}!\n- If you get a letter correct in the wrong position, it becomes {COLOR_YELLOW}yellow{RESET}.\n- If you get the letter wrong, it doesn't change colors.")
 
     # This is where we choose our Word, i got a little help here
+    # I am not hard coding several hundred lines of words when i can make the options variable anyways for later expansion 
     with open("wordle_ord.txt") as f:
         words = f.readlines()
     word_index = int(random.randrange(1, len(words)))
     correct = words[word_index].lower()
-
-    print(f"{correct}")
-
-
+    print(f"\n{correct}\n")
     # attempts, I would like this to become variable 
     for x in range(6):
         # guess input
@@ -48,7 +47,7 @@ while True:
             else:
                 print(guess[i], end="")
         
-        print("")
+        print("\n")
 
         if s == 5:
             break
@@ -56,6 +55,8 @@ while True:
     
     if s == 5:
         print("╰(°ロ°)╯ We have a winner! You will be sacrificed to the dark gods of chaos!")
+        print("")
+        print("The dark gods can have a live sacrifice as a treat!")
         pass
 
 
@@ -65,10 +66,18 @@ while True:
         pass
 
     # this should allow replay
-    end = input("Would you like to play again and perhaps win? Y/N ").lower()
-    if end[0] == "y":
-        pass
-    else:
+    # Chupoclops was here
+    while True:
+        end = input("Would you like to play again and perhaps win? Y/N ").lower()
+        if end[0] == "y":
+            break
+        elif end[0] == "n":
+            collapse = 1
+            break
+        else:
+            print("\nI do not understand.\n")
+            pass
+    if collapse == 1:
         break
 
 # Currently known issues: Out of string crash, If statement not working when it should, some pc's want relative path
