@@ -22,12 +22,30 @@ while True:
     # This is where we choose our Word, i got a little help here
     # I am not hard coding several hundred lines of words when i can make the options variable anyways for later expansion
     guess_attempts = 6
-    word_length = 5
+    while True:
+        florp = input(f"\n\nDo you want to change your guess attempts? Normal is {guess_attempts}! Y/N : ").lower()
+        if florp[0] == "y":
+                new_guess_attempts = input(f"How many attempts do you want? Must be a number! : ")
+                try:
+                    new_guess_attempts = int(new_guess_attempts)
+                    guess_attempts = new_guess_attempts
+                except:
+                    print("Something went wrong. You get 6 attempts.")
+                    guess_attempts = 6
+                finally:
+                    break
+        elif florp[0] == "n":
+            break
+        else:
+            print(f"\n{COLOR_RED}I do not understand!{RESET}\n")
+            pass
+    word_length = 0
     with open("wordle_ord.txt") as f:
         words = f.readlines()
     word_index = int(random.randrange(1, len(words)))
     correct = words[word_index].lower()
     correct = correct.replace("\n", "")
+    word_length = len(correct)
     print(f"\n{correct}")
     # attempts, I would like this to become variable 
     for x in range(guess_attempts):
@@ -42,7 +60,6 @@ while True:
                 break
         # check letters
         for i in range(0, word_length):
-
             if guess[i]==correct[i]:
                 print(f"{COLOR_GREEN}{guess[i]}{RESET}", end="")
                 s = s+1
