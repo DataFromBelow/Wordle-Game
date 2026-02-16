@@ -18,7 +18,7 @@ while True:
     # Name of the game, uppercase
     print("WORDLE Knockoff! (play the real thing!)")
     print("\n\nRules of wordle\n\n")
-    print(f"You get several guesses (currently 6) to guess a word of 5 letters.\n- If you get a letter correct in the right position, it becomes {COLOR_GREEN}green{RESET}!\n- If you get a letter correct in the wrong position, it becomes {COLOR_YELLOW}yellow{RESET}.\n- If you get the letter wrong, it doesn't change colors.")
+    print(f"You get several guesses (normally 6) to guess a word of 5 letters.\n- If you get a letter correct in the right position, it becomes {COLOR_GREEN}green{RESET}!\n- If you get a letter correct in the wrong position, it becomes {COLOR_YELLOW}yellow{RESET}.\n- If you get the letter wrong, it doesn't change colors.")
     # This is where we choose our Word, i got a little help here
     # I am not hard coding several hundred lines of words when i can make the options variable anyways for later expansion
     guess_attempts = 6
@@ -51,33 +51,32 @@ while True:
             else:
                 print(guess[i], end="")
         print("\n")
-        if s == 5:
+        if s == word_length:
             break
-    if s == 5:
+    if s == word_length:
         print("╰(°ロ°)╯ We have a winner! You will be sacrificed to the dark gods of chaos!")
         print("")
         print("The dark gods can have a live sacrifice as a treat!")
         pass
     else:
         print("(┬┬﹏┬┬) We have a loser! Better luck next time! Now you will become a chaos spawn...")
-        print(f"This time's word was ", end="")
-        print(f"{(correct).upper()}", end="")
-        print("!")
+        print("This time's word was " + correct.upper() + "!")
+        #print(f"{(correct).upper()}", end="")
+        #print("!")
         pass
     # this should allow replay
     # Chupoclops was here
     while True:
-        end = input("Would you like to play again and perhaps win? Y/N ").lower()
+        end = input("Would you like to play again and perhaps win? Y / N\n").lower()
         if end[0] == "y":
             break
         elif end[0] == "n":
             collapse = 1
             break
         else:
-            print("\nI do not understand.\n")
+            print(f"\n{COLOR_RED}I do not understand!{RESET}\n")
             pass
     if collapse == 1:
         break
 
 # Currently known issues: Out of string crash, If statement not working when it should, some pc's want relative path
-
