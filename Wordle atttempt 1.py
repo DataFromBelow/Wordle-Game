@@ -10,8 +10,6 @@ RESET = "\033[0m"
 collapse = 0
 while True:
     # clears the terminal, to be made optional
-    guess_attempts = 6
-    word_length = 5
     terminal_clear = input("Clear Terminal? Y/N ").lower()
     if terminal_clear[0] == "y":
         os.system("cls")
@@ -22,12 +20,15 @@ while True:
     print("\n\nRules of wordle\n\n")
     print(f"You get several guesses (currently 6) to guess a word of 5 letters.\n- If you get a letter correct in the right position, it becomes {COLOR_GREEN}green{RESET}!\n- If you get a letter correct in the wrong position, it becomes {COLOR_YELLOW}yellow{RESET}.\n- If you get the letter wrong, it doesn't change colors.")
     # This is where we choose our Word, i got a little help here
-    # I am not hard coding several hundred lines of words when i can make the options variable anyways for later expansion 
+    # I am not hard coding several hundred lines of words when i can make the options variable anyways for later expansion
+    guess_attempts = 6
+    word_length = 5
     with open("wordle_ord.txt") as f:
         words = f.readlines()
     word_index = int(random.randrange(1, len(words)))
     correct = words[word_index].lower()
-    print(f"\n{correct}\n")
+    correct = correct.replace("\n", "")
+    print(f"\n{correct}")
     # attempts, I would like this to become variable 
     for x in range(guess_attempts):
         # guess input
@@ -79,3 +80,4 @@ while True:
         break
 
 # Currently known issues: Out of string crash, If statement not working when it should, some pc's want relative path
+
