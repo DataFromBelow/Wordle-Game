@@ -1,5 +1,5 @@
 # Wordle Game
-This is like the Wordle game, except it is written in python and currently will be only in commandline.
+This is like the Wordle game but worse, except it is written in python and currently will be only in commandline.
 
 ## Please enjoy or don't
 This is meant to be a Python commandline version of the game Wordle. 
